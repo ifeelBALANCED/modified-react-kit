@@ -1,0 +1,75 @@
+{
+  "name": "ts-react-lib-starter-kit",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-cli serve --mode=development --port 3333 --env development --open --hot",
+    "prebuild": "rimraf build && rimraf dist",
+    "build": "npm-run-all --serial prebuild build:*",
+    "build:esm": "cross-env BABEL_ENV=esm babel src --root-mode upward --extensions .ts,.tsx -d dist/esm --source-maps",
+    "build:cjs": "cross-env BABEL_ENV=cjs babel src --root-mode upward --extensions .ts,.tsx -d dist/cjs --source-maps",
+    "build:types": "tsc --project tsconfig.build.json",
+    "format": "prettier --write \"./**/*.{ts,tsx}\"",
+    "lint": "eslint \"./src/**/*.{ts,tsx}\" --fix",
+    "cypress:open": "cypress open --config-file cypress.config.json",
+    "test": "start-server-and-test start http://localhost:3333 cypress:open"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn run lint && yarn test",
+      "pre-push": "yarn run lint && yarn test"
+    }
+  },
+  "lint-staged": {
+    "src/*.{ts,tsx}": [
+      "yarn format",
+      "yarn lint"
+    ]
+  },
+  "author": "TicTak21(modified Alex build)",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.14.5",
+    "@babel/core": "^7.14.6",
+    "@babel/preset-env": "^7.14.7",
+    "@babel/preset-react": "^7.14.5",
+    "@babel/preset-typescript": "^7.14.5",
+    "@types/node": "^16.6.1",
+    "@types/react": "^17.0.14",
+    "@types/react-dom": "^17.0.9",
+    "@types/webpack": "^5.28.0",
+    "@types/webpack-dev-server": "^3.11.5",
+    "@typescript-eslint/eslint-plugin": "^4.28.2",
+    "@typescript-eslint/parser": "^4.28.2",
+    "babel-loader": "^8.2.2",
+    "babel-plugin-const-enum": "^1.1.0",
+    "cross-env": "^7.0.3",
+    "cypress": "^8.2.0",
+    "eslint": "^7.30.0",
+    "eslint-plugin-react": "^7.24.0",
+    "fork-ts-checker-webpack-plugin": "^6.2.12",
+    "html-webpack-plugin": "^5.3.2",
+    "husky": "^7.0.2",
+    "lint-staged": "^11.2.3",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.4.1",
+    "react-icons": "^4.2.0",
+    "rimraf": "^3.0.2",
+    "start-server-and-test": "^1.13.1",
+    "ts-loader": "^9.2.3",
+    "ts-node": "^10.1.0",
+    "tsconfig-paths-webpack-plugin": "^3.5.1",
+    "typescript": "^4.3.5",
+    "webpack": "^5.44.0",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "dependencies": {
+    "@chakra-ui/react": "^1.6.5",
+    "@emotion/react": "^11.4.0",
+    "@emotion/styled": "^11.3.0",
+    "framer-motion": "^4.1.17",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  }
+}
