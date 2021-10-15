@@ -1,4 +1,4 @@
-# ts-react-lib-starter-kit
+# react-starter-kit
 
 - Typescript
 - React
